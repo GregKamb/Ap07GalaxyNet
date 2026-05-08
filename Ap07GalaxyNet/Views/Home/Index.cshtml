@@ -1,0 +1,54 @@
+﻿@using System.Security.Claims
+@model IndexVm
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    <div class="col col-9">
+        <h2>Letzte Beiträge</h2>
+        @foreach (var post in Model.RecentPosts)
+        {
+            <b><img src="@post.AppUser.ImagePath" /> <a href="/Home/UserProfile/@post.AppUserId">@post.AppUser.Username</a> am @post.PostedOn: <a data-bs-toggle="collapse" href="#post-@post.Id" @* href="/Home/Post?postId=@post.Id" *@>@post.Title</a> (@post.Likes.Count() Empfehlungen)</b>
+            <div class="collapse" id="post-@post.Id">
+                @post.Content    
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form method="post" action="/Home/ToggleLike">
+                    @{
+                        var userId = int.Parse(User.FindFirstValue("userid"));
+                        var userLikedPost = post.Likes.Where(l => l.AppUserId == userId).Any();
+
+                        if (userLikedPost)
+                        {
+                            <button class="btn btn-sm btn-danger" name="postId" value="@post.Id">Empfehlung entfernen</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-sm btn-success" name="postId" value="@post.Id">Beitrag Empfehlen</button>
+                        }
+                    }
+                </form>
+            }
+            <br />
+        }
+    </div>
+    <div class="col">
+        <h2>Letzte GalaxyWords</h2>
+        @foreach (var word in Model.LastGalaxyWords)
+        {
+            <h4><a href="/Home/Index?gwId=@word.Id">@word.Word</a></h4>
+        }
+        @if (Model.SelectedGalaxyWordId != null)
+        {
+            <a class="link-danger" href="/Home/Index">Filter zurücksetzen</a>
+        }
+    </div>
+</div>

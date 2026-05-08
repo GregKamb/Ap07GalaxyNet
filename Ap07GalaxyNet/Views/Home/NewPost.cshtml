@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "New Post";
+}
+
+<h2>Neuen Beitrag verfassen</h2>
+
+<form method="post" action="/Home/NewPost">
+    <input name="title" maxlength="50"/><br />
+    <textarea name="content" maxlength="100"></textarea><br />
+    <button>Beitrag abschicken</button>
+</form>

@@ -1,0 +1,23 @@
+﻿@model RegisterVm
+
+@{
+    ViewData["Title"] = "Registrieren";
+}
+
+<h2>Registrieren</h2>
+
+<form method="post" action="/Auth/Register" enctype="multipart/form-data">
+    <input name="email" placeholder="email" value="@Model.Email"/><br />
+    <input name="username" placeholder="benutzername" value="@Model.Username" /><br />
+    <input type="password" name="password" placeholder="passwort" /><br />
+    <input type="password" name="passwordConfirm" placeholder="pw. wiederholung" /><br />
+    <input type="file" name="userImage" /><br />
+    <button>Registrieren</button>
+</form>
+
+<div class="text-danger">
+    @foreach(var error in Model.Errors)
+    {
+        <p>@error</p>
+    }
+</div>

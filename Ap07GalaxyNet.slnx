@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Ap07GalaxyNet/Ap07GalaxyNet.csproj" />
+  <Project Path="GalaxyWordExtractor/GalaxyWordExtractor.csproj" Id="8a40b646-ee3a-4ddf-830f-bfe7dc4c140a" />
+</Solution>
