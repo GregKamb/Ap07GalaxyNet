@@ -2,10 +2,28 @@
     ViewData["Title"] = "New Post";
 }
 
-<h2>Neuen Beitrag verfassen</h2>
-
-<form method="post" action="/Home/NewPost">
-    <input name="title" maxlength="50"/><br />
-    <textarea name="content" maxlength="100"></textarea><br />
-    <button>Beitrag abschicken</button>
-</form>
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-primary">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Neuen Beitrag verfassen</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="post" action="/Home/NewPost">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Titel:</label>
+                        <input name="title" class="form-control" maxlength="50" placeholder="Worüber möchtest du schreiben?" required />
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Inhalt:</label>
+                        <textarea name="content" class="form-control" rows="4" maxlength="100" placeholder="Schreibe deinen Beitrag hier..." required></textarea>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a href="/Home/Index" class="btn btn-outline-secondary">Abbrechen</a>
+                        <button class="btn btn-primary">Beitrag abschicken</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

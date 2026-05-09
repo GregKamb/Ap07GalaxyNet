@@ -5,50 +5,88 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-5 mt-4">
+    <h1 class="display-4 fw-bold">Welcome to Chirps</h1>
+    <p class="text-muted">Your portal to the Galaxy's thoughts. Share discoveries and insights.</p>
 </div>
 
 <div class="row">
-    <div class="col col-9">
-        <h2>Letzte Beiträge</h2>
+    <div class="col-md-8">
+        <h3 class="mb-4">Letzte Beiträge</h3>
+        
         @foreach (var post in Model.RecentPosts)
         {
-            <b><img src="@post.AppUser.ImagePath" /> <a href="/Home/UserProfile/@post.AppUserId">@post.AppUser.Username</a> am @post.PostedOn: <a data-bs-toggle="collapse" href="#post-@post.Id" @* href="/Home/Post?postId=@post.Id" *@>@post.Title</a> (@post.Likes.Count() Empfehlungen)</b>
-            <div class="collapse" id="post-@post.Id">
-                @post.Content    
-            </div>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <form method="post" action="/Home/ToggleLike">
-                    @{
-                        var userId = int.Parse(User.FindFirstValue("userid"));
-                        var userLikedPost = post.Likes.Where(l => l.AppUserId == userId).Any();
+            <div class="card mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="@post.AppUser.ImagePath" class="rounded-circle border me-3" style="width: 50px; height: 50px; object-fit: cover;" onerror="this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'" alt="User profile" />
+                        <div>
+                            <a href="/Home/UserProfile/@post.AppUserId" class="text-decoration-none fw-bold text-dark fs-5">@post.AppUser.Username</a>
+                            <small class="text-muted d-block">@post.PostedOn.ToLocalTime().ToString("g")</small>
+                        </div>
+                    </div>
+                    
+                    <h5 class="card-title">
+                        <a data-bs-toggle="collapse" href="#post-@post.Id" class="text-decoration-none text-primary fw-bold">
+                            @post.Title
+                        </a>
+                    </h5>
+                    
+                    <div class="collapse mt-2" id="post-@post.Id">
+                        <p class="card-text text-secondary bg-light p-3 rounded">
+                            @post.Content
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-white border-top-0 d-flex justify-content-between align-items-center py-3">
+                    <span class="text-muted small fw-bold">@post.Likes.Count() Likes</span>
+                    
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" action="/Home/ToggleLike" class="m-0">
+                            @{
+                                var userId = int.Parse(User.FindFirstValue("userid"));
+                                var userLikedPost = post.Likes.Where(l => l.AppUserId == userId).Any();
 
-                        if (userLikedPost)
-                        {
-                            <button class="btn btn-sm btn-danger" name="postId" value="@post.Id">Empfehlung entfernen</button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-sm btn-success" name="postId" value="@post.Id">Beitrag Empfehlen</button>
-                        }
+                                if (userLikedPost)
+                                {
+                                    <button class="btn btn-sm btn-outline-danger px-3 rounded-pill" name="postId" value="@post.Id">♥ Unlike</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-sm btn-outline-primary px-3 rounded-pill" name="postId" value="@post.Id">♡ Like</button>
+                                }
+                            }
+                        </form>
                     }
-                </form>
-            }
-            <br />
+                </div>
+            </div>
         }
     </div>
-    <div class="col">
-        <h2>Letzte GalaxyWords</h2>
-        @foreach (var word in Model.LastGalaxyWords)
-        {
-            <h4><a href="/Home/Index?gwId=@word.Id">@word.Word</a></h4>
-        }
-        @if (Model.SelectedGalaxyWordId != null)
-        {
-            <a class="link-danger" href="/Home/Index">Filter zurücksetzen</a>
-        }
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Letzte Peep-Wörter</h4>
+                
+                <div class="list-group list-group-flush mb-3">
+                    @foreach (var word in Model.LastGalaxyWords)
+                    {
+                        <a href="/Home/Index?gwId=@word.Id" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center @(Model.SelectedGalaxyWordId == word.Id ? "active bg-primary border-primary" : "")">
+                            @word.Word
+                            <span class="badge bg-secondary rounded-pill">></span>
+                        </a>
+                    }
+                </div>
+                
+                @if (Model.SelectedGalaxyWordId != null)
+                {
+                    <div class="d-grid">
+                        <a class="btn btn-outline-danger btn-sm" href="/Home/Index">Filter zurücksetzen</a>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>

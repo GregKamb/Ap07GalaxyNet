@@ -23,12 +23,12 @@ public class HomeController : Controller
 
         if (User.Identity.IsAuthenticated)
         {
-            Console.WriteLine("Eingeloggter Benutzer ist hier");
+            
             numPostsToShow = 10;
         }
         else
         {
-            Console.WriteLine("Anonymer Benutzer ist hier");
+           
         }
 
         /*
@@ -201,15 +201,15 @@ public class HomeController : Controller
             await _ctx.SaveChangesAsync();
         }
 
-        return View();
+        return RedirectToAction(nameof(Index));
     }
 
     private string[] GetGalaxyWords(string str)
     {
         return str
             .Split(" ") //Aus einem String eine Liste mit Wörtern machen
-            .Where(wort => wort.StartsWith("§")) //Nur Wörter die mit § beginnen berücksichtigen
-            .SelectMany(wort => wort.Split("§")) //Wörter behandeln, die noch ein § beinhalten
+            .Where(wort => wort.StartsWith("<")) //Nur Wörter die mit < beginnen berücksichtigen
+            .SelectMany(wort => wort.Split("<")) //Wörter behandeln, die noch ein § beinhalten
             .Where(wort => wort.Length > 0) //Leere Wörter (die durch vorigen Schritt entstanden sind) entfernen
             .Select(wort => wort.Substring(0, FindIndexOfNonLetter(wort))) //Nicht-Buchstaben entfernen
             .Where(wort => wort.Length >= 5 && wort.Length <= 20) //Länge prüfen
@@ -238,53 +238,12 @@ public class HomeController : Controller
         //var username = User.Claims.First(c => c.Type == "name").Value;
         var username = User.FindFirstValue("name");
 
-        Console.WriteLine(username + " ist auf der Privacy Seite");
+        
 
         return View();
     }
 
-    //[HttpGet]
-    //public IActionResult FakeLogin()
-    //{
-    //    return View();
-    //}
-
-    //[HttpPost]
-    //public async Task<IActionResult> FakeLogin(string username, string password)
-    //{
-    //    //An dieser Stelle, müssten username und password mit der DB abgeglichen werden
-
-    //    //Wenn das passt, kann der Benutzer in der Anwendung angemeldet werden
-    //    //(= ihm wird das AuthCookie ausgestellt)
-
-    //    //---
-
-    //    //Zunächst werden alle relevanten Informationen aus der DB abgerufen
-    //    //und in Claims verpackt
-
-    //    var myClaim = new Claim("name", username);
-
-    //    var claimList = new List<Claim>();
-    //    claimList.Add(myClaim);
-
-    //    //Diese Claims werden verwendet um eine Identity und einen Principal zu erzeugen
-    //    var claimsIdentity = new ClaimsIdentity(claimList, CookieAuthenticationDefaults.AuthenticationScheme);
-    //    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-    //    //Ein Principal ist innerhalb der .NET Welt ein Rechteinhaber
-
-    //    //Dieser wird in der Anwendung angemeldet
-    //    await HttpContext.SignInAsync(claimsPrincipal);
-
-    //    return RedirectToAction(nameof(Privacy));
-    //}
-
-    //[HttpGet]
-    //public async Task<IActionResult> Logout()
-    //{
-    //    await HttpContext.SignOutAsync();
-    //    return RedirectToAction(nameof(Index));
-    //}
+    
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

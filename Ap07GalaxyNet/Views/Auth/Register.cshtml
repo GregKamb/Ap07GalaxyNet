@@ -4,20 +4,50 @@
     ViewData["Title"] = "Registrieren";
 }
 
-<h2>Registrieren</h2>
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">Registrieren</h2>
+                
+                @if (Model.Errors.Any())
+                {
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach (var error in Model.Errors)
+                            {
+                                <li>@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
 
-<form method="post" action="/Auth/Register" enctype="multipart/form-data">
-    <input name="email" placeholder="email" value="@Model.Email"/><br />
-    <input name="username" placeholder="benutzername" value="@Model.Username" /><br />
-    <input type="password" name="password" placeholder="passwort" /><br />
-    <input type="password" name="passwordConfirm" placeholder="pw. wiederholung" /><br />
-    <input type="file" name="userImage" /><br />
-    <button>Registrieren</button>
-</form>
-
-<div class="text-danger">
-    @foreach(var error in Model.Errors)
-    {
-        <p>@error</p>
-    }
+                <form method="post" action="/Auth/Register" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">E-Mail</label>
+                        <input name="email" class="form-control" value="@Model.Email" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Benutzername</label>
+                        <input name="username" class="form-control" value="@Model.Username" required />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Passwort</label>
+                            <input type="password" name="password" class="form-control" required />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Passwort wiederholen</label>
+                            <input type="password" name="passwordConfirm" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Profilbild</label>
+                        <input type="file" name="userImage" class="form-control" />
+                    </div>
+                    <button class="btn btn-success w-100">Registrieren</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
