@@ -1,37 +1,34 @@
-# GalaxyNet - ASP.NET Core MVC Application
+# 🚀 Chirps (GalaxyNet) - ASP.NET Core MVC Application
 
 ## 📝 Project Overview
-This is a full-stack web application developed as part of my professional training (Lehrabschluss - Applikationsentwicklung). It demonstrates a modern approach to web development using the Microsoft tech stack.
+This is a full-stack web application developed as part of my professional training (Lehrabschluss - Applikationsentwicklung) in Vienna. It demonstrates a modern approach to web development, highlighting my ability to design scalable backend architectures and integrate them with dynamic frontends.
 
-## 🚀 Technologies Used
-* **Backend:** C# / .NET Core MVC
-* **Database:** Microsoft SQL Server
-* **Frontend:** HTML5, CSS3, JavaScript
-* **Tools:** Entity Framework Core, Visual Studio 2022
+## 🛠️ Technologies Used
+* **Backend:** C# / .NET 10 (ASP.NET Core MVC)
+* **Database:** Entity Framework Core with SQL Server
+* **Authentication:** Custom Cookie-based Auth (no external identity libraries)
+* **Security:** SHA256 Password Hashing with unique Salts
+* **Frontend:** HTML5, CSS3, Bootstrap 5 (Responsive UI)
 
-## 🛠️ Key Features
-* **User Authentication:** Secure login and registration system.
-* **CRUD Operations:** Full management of data (Create, Read, Update, Delete).
-* **Responsive Design:** Optimized for both desktop and mobile devices.
-* **Database Management:** Relational database design with SQL Server Management Studio.
+## ✨ Key Features
+* **Custom Security:** A hand-built authentication system focusing on security. Passwords are never stored in plain text; they are hashed and salted.
+* **Dynamic Peep-Words:** An automated extraction system that finds keywords in posts and tracks their popularity.
+* **Smart Filtering:** Users can filter the global feed by clicking on trending "Peep-words" in the sidebar.
+* **Interaction System:** Like/Unlike functionality with real-time counter updates.
+* **Auto-Seeding:** The application automatically creates the database and populates it with sample data on the first run, making testing effortless.
 
-## 🎓 About this Project
-This project was built to apply the theoretical and practical knowledge gained during my 4-year apprenticeship in Vienna. It showcases my ability to design scalable backend architectures and integrate them with dynamic frontends.# GalaxyNet - ASP.NET Core MVC Application
+## 🎮 Try It Yourself (Interactive Features)
+I highly recommend testing the custom **Peep-Word** extraction logic! 
+1. Log in to the application.
+2. Click on **Neuer Beitrag** (New Post).
+3. In your content, use the **`<`** symbol before a word to tag it (word must be between 5 and 20 characters). 
+   - *Example: "Exploring the new <Nebula today!"*
+4. Submit the post. You will instantly see the word magically extracted and appear in the "Letzte Peep-Wörter" sidebar as a clickable filter!
 
-## 📝 Project Overview
-This is a full-stack web application developed as part of my professional training (Lehrabschluss - Applikationsentwicklung). It demonstrates a modern approach to web development using the Microsoft tech stack.
-
-## 🚀 Technologies Used
-* **Backend:** C# / .NET Core MVC
-* **Database:** Microsoft SQL Server
-* **Frontend:** HTML5, CSS3, JavaScript
-* **Tools:** Entity Framework Core, Visual Studio 2022
-
-## 🛠️ Key Features
-* **User Authentication:** Secure login and registration system.
-* **CRUD Operations:** Full management of data (Create, Read, Update, Delete).
-* **Responsive Design:** Optimized for both desktop and mobile devices.
-* **Database Management:** Relational database design with SQL Server Management Studio.
-
-## 🎓 About this Project
-This project was built to apply the theoretical and practical knowledge gained during my 4-year apprenticeship in Vienna. It showcases my ability to design scalable backend architectures and integrate them with dynamic frontends.
+## 🚀 How to Run
+1. Clone the repository.
+2. Open the solution in **Visual Studio 2022**.
+3. Press **F5**. The database will be created and seeded automatically.
+4. **Test Credentials (Auto-generated):**
+   - **Username:** `TestExplorer`
+   - **Password:** `Password123!`
