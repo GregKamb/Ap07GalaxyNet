@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Ap07GalaxyNet.Services;
 
 namespace Ap07GalaxyNet.Controllers;
 
@@ -14,11 +15,13 @@ public class AuthController : Controller
 {
     private readonly GalaxyContext _ctx;
     private readonly IWebHostEnvironment _env;
+    private readonly BlobService _blobService;
 
-    public AuthController(GalaxyContext ctx, IWebHostEnvironment env)
+    public AuthController(GalaxyContext ctx, IWebHostEnvironment env, BlobService blobService)
     {
         _ctx = ctx;
         _env = env;
+        _blobService = blobService;
     }
 
     [HttpGet]
@@ -53,18 +56,29 @@ public class AuthController : Controller
 
         //Bildupload
 
-        var relativeImagePath = "";
+        //var relativeImagePath = "";
+
+        //if (userImage != null && userImage.Length > 0)
+        //{
+        //    relativeImagePath = $"/images/{userImage.FileName}";
+
+        //    var fullImagePath = @$"{_env.WebRootPath}{relativeImagePath}";
+
+        //    using var fileStream = System.IO.File.Create(fullImagePath);
+
+        //    await userImage.CopyToAsync(fileStream);
+        //}
+
+        //Bildupload (AZURE BLOB STORAGE)
+        var imagePath = ""; // Εδώ θα αποθηκευτεί το URL του Azure
 
         if (userImage != null && userImage.Length > 0)
         {
-            relativeImagePath = $"/images/{userImage.FileName}";
-
-            var fullImagePath = @$"{_env.WebRootPath}{relativeImagePath}";
-
-            using var fileStream = System.IO.File.Create(fullImagePath);
-
-            await userImage.CopyToAsync(fileStream);
+            // Στέλνουμε τη φωτογραφία στη Σουηδία με μία μόνο γραμμή!
+            imagePath = await _blobService.UploadImageAsync(userImage);
         }
+
+        //Salt erzeugen und Hashen
 
 
         //Salt erzeugen und Hashen
@@ -81,7 +95,7 @@ public class AuthController : Controller
             Username = username,
             PasswordHash = hash,
             Salt = saltBytes,
-            ImagePath = relativeImagePath
+            ImagePath = imagePath
         };
 
         _ctx.AppUsers.Add(newAppUser);

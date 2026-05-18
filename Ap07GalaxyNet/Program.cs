@@ -7,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Διαβάζει το κλειδί από το appsettings.json
+var blobConnectionString = builder.Configuration.GetConnectionString("AzureStorage");
+
+// Εγγράφει το BlobService για να μπορούμε να το χρησιμοποιούμε στους Controllers
+builder.Services.AddScoped(x => new Ap07GalaxyNet.Services.BlobService(blobConnectionString));
+
 builder.Services.AddDbContext<GalaxyContext>(opts =>
 {
     opts.UseSqlServer("name=DbConnection");
