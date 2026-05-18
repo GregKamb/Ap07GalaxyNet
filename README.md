@@ -4,8 +4,7 @@
 This is a full-stack web application developed as part of my professional training (Lehrabschluss - Applikationsentwicklung) in Vienna. It demonstrates a modern approach to web development, highlighting my ability to design scalable backend architectures and integrate them with dynamic frontends.
 
 ## 🌐 Live Demo
-You can test the application live here: [Greg-GalaxyNet on Azure][(https://greg-galaxynet.azurewebsites.net)](https://greg-galaxynet-age6d0hshmdueghb.westeurope-01.azurewebsites.net/Home/Index)
-
+You can test the application live here: [Greg-GalaxyNet on Azure][[(https://greg-galaxynet.azurewebsites.net)](https://greg-galaxynet-age6d0hshmdueghb.westeurope-01.azurewebsites.net/Home/Index)]
 ## 🛠️ Technologies Used
 
 * **Cloud Infrastructure:** Deployed on **Microsoft Azure** (Azure App Service)
