@@ -5,16 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
+using Ap07GalaxyNet.Services;
 
 namespace Ap07GalaxyNet.Controllers;
 
 public class HomeController : Controller
 {
     private readonly GalaxyContext _ctx;
+    private readonly BlobService _blobService;
 
-    public HomeController(GalaxyContext ctx)
+    public HomeController(GalaxyContext ctx, BlobService blobService)
     {
         _ctx = ctx;
+        _blobService = blobService;
     }
 
     public async Task<IActionResult> Index(int? gwId)
