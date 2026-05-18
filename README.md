@@ -3,11 +3,16 @@
 ## 📝 Project Overview
 This is a full-stack web application developed as part of my professional training (Lehrabschluss - Applikationsentwicklung) in Vienna. It demonstrates a modern approach to web development, highlighting my ability to design scalable backend architectures and integrate them with dynamic frontends.
 
+## 🌐 Live Demo
+You can test the application live here: [Greg-GalaxyNet on Azure](https://greg-galaxynet.azurewebsites.net)
+
 ## 🛠️ Technologies Used
-* **Backend:** C# / .NET 10 (ASP.NET Core MVC)
-* **Database:** Entity Framework Core with SQL Server
-* **Authentication:** Custom Cookie-based Auth (no external identity libraries)
-* **Security:** SHA256 Password Hashing with unique Salts
+
+* **Cloud Infrastructure:** Deployed on **Microsoft Azure** (Azure App Service)
+* **File Storage:** **Azure Blob Storage** (for fast, scalable profile picture uploads)
+* **Database:** Entity Framework Core with **Azure SQL Database**
+* **Backend:** C# / .NET (ASP.NET Core MVC)
+* **Authentication:** Custom Cookie-based Auth (Hash & Salt security, no external libraries)
 * **Frontend:** HTML5, CSS3, Bootstrap 5 (Responsive UI)
 
 ## ✨ Key Features
