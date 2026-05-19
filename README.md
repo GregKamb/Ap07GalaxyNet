@@ -5,7 +5,12 @@ This is a full-stack web application developed as part of my professional traini
 
 
 ## 🌐 Live Demo
+
 You can test the application live here: [Greg-GalaxyNet on Azure](https://greg-galaxynet-age6d0hshmdueghb.westeurope-01.azurewebsites.net)
+
+> ⚠️ **Important Note for Reviewers (Azure Free Tier):**
+> This project is currently hosted on Azure's free tier. After a period of inactivity, both the web server and the database automatically enter "sleep mode" to conserve resources. 
+> **When you first click the link, the application might take 1-2 minutes to wake up, or it may initially display a timeout error.** > If this happens, please wait a moment and **simply refresh the page (F5)**. It will wake up and run smoothly!
 
 ## 🛠️ Technologies Used
 
